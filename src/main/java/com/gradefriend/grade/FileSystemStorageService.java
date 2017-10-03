@@ -27,7 +27,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Autowired
     public FileSystemStorageService() {
-        this.rootLocation = Paths.get("/home/ubuntu/files");
+        this.rootLocation = Paths.get("/home/gauravagarwal/files");
     }
 
     @Override

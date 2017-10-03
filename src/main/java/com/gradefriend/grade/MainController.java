@@ -13,37 +13,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @PropertySource("classpath:application.properties")
 public class MainController {
 
+    @Autowired
+    StorageService storageService;
+    @Autowired
+    S3UploadService s3UploadServiceImpl;
+    @Autowired
+    EmailService emailService;
     @Value("${sendtoemail}")
     private String sendTo;
 
-    @Autowired
-    StorageService storageService;
-
-    @Autowired
-    S3UploadService s3UploadServiceImpl;
-
-    @Autowired
-    EmailService emailService;
-
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String fileSave(@ModelAttribute UserData data) {
+        if (data.getFile() == null || data.getFile().isEmpty()) {
+            doThingsWithoutFile(data);
+        } else {
+            doThingsWithFile(data);
+        }
+        return "thegradefriend";
+    }
+
+    private void doThingsWithFile(UserData data) {
         try {
             int randomNumber = Utils.getRandomNumber();
-            String filename = data.getEmail() + "--" + randomNumber + "--" + data.getFile().getOriginalFilename();
-            try {
-
-                s3UploadServiceImpl.uploadFile(data.getFile(), filename);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            String filename = data.getEmail() + "__" + randomNumber + "__" + data.getFile().getOriginalFilename();
             try {
                 storageService.store(data.getFile(), filename);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
+                s3UploadServiceImpl.uploadFile(data.getFile(), filename);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
                 emailService.sendMessageWithAttachment(sendTo,
-                        "New Query from " + data.getEmail(), Utils.getText(data), data.getFile());
+                        "New Query from " + data.getEmail(), Utils.getText(data), data.getFile(), filename);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -53,7 +59,16 @@ public class MainController {
                             "Fail to Record Files For new User  " + data.getEmail(), Utils.getText(data));
             e.printStackTrace();
         }
-        return "thegradefriend";
+    }
+
+    private void doThingsWithoutFile(UserData data) {
+        try {
+            emailService.sendSimpleMessage(sendTo,
+                    "New Query from " + data.getEmail(), Utils.getText(data));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -62,15 +77,4 @@ public class MainController {
         return "thegradefriend";
     }
 
-
-//    public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
-//        try {
-//            storageService.store(file);
-//            model.addAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-//            files.add(file.getOriginalFilename());
-//        } catch (Exception e) {
-//            model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
-//        }
-//        return "uploadForm";
-//    }
 }

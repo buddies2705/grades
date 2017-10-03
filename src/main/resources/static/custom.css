@@ -2,7 +2,7 @@
 body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;
-      color: green;/* body text color */
+      color: #56ab2f;/* body text color */
   }
   h2 {
       font-size: 24px;
@@ -43,7 +43,7 @@ body {
   	 text-align:left;
   }
   .jumbotron {
-      background-color:green;		/*  silver=#C0C0C0      00ccff*/
+      background-color:#56ab2f;		/*  silver=#C0C0C0      00ccff*/
       /*background-image: url("Images/Book.jpg");*/ 
       background-repeat:no-repeat;
       background-size:auto;
@@ -96,7 +96,7 @@ body {
       font-style: normal;
   }
   .panel {
-      border: 1px solid green; 			/*col border   orange( #f4511e) to blue  */
+      border: 1px solid #56ab2f; 			/*col border   orange( #f4511e) to blue  */
       border-radius:2 !important;
       transition: box-shadow 0.5s;
   }
@@ -106,11 +106,11 @@ body {
   .panel-footer .btn:hover {
       border: 1px solid #00ccff;
       background-color: #fff !important;
-      color: green;
+      color: #56ab2f;
   }
   .panel-heading {
       color: #fff !important;
-      background-color: green !important;	/*  subject bck*/
+      background-color: #56ab2f !important;	/*  subject bck*/
       padding: 2px;
       border-bottom: 1px solid transparent;
       border-top-left-radius: 0px;
@@ -130,7 +130,7 @@ body {
   }
   .panel-footer .btn {
       margin: 15px 0;
-      background-color: green;
+      background-color: #56ab2f;
       color: #fff;
   }
   .navbar {
@@ -139,7 +139,6 @@ body {
       background-color: #fff;	
       z-index: 9999;
       border: 0;
-      display:none;//
       font-size: 13px !important;
       line-height: 1.42857143 !important;
       letter-spacing: 4px;
@@ -147,7 +146,7 @@ body {
       font-family: Montserrat, sans-serif;
   }
   .navbar li a, .navbar .navbar-brand {
-      color: green !important;
+      color: #56ab2f !important;
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
       color: #fff !important;
@@ -165,7 +164,7 @@ body {
   footer .glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
-      color: green;
+      color: #56ab2f;
   }
   .slideanim {visibility:hidden;}
   .slide {
@@ -210,3 +209,35 @@ body {
         font-size: 150px;
     }
   }
+
+
+.giphyicon-color{
+color:#56ab2f;
+}
+
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('http://i.stack.imgur.com/FhHRx.gif')
+                50% 50%
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}

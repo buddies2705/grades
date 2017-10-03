@@ -15,5 +15,5 @@ public interface EmailService {
             String to, String subject, String text);
 
     void sendMessageWithAttachment(
-            String to, String subject, String text, MultipartFile multipartFile) throws MessagingException, IOException;
+            String to, String subject, String text, MultipartFile multipartFile, String filename) throws MessagingException, IOException;
 }
