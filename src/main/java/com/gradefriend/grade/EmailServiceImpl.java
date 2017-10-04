@@ -27,7 +27,7 @@ public class EmailServiceImpl implements EmailService {
     private String from;
 
 
-    private String path = "/home/gauravagarwal/files";
+    private String path = "/home/ubuntu/files";
 
     @Override
     public void sendSimpleMessage(

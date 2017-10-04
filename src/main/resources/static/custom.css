@@ -139,6 +139,7 @@ body {
       background-color: #fff;	
       z-index: 9999;
       border: 0;
+      display:none;
       font-size: 13px !important;
       line-height: 1.42857143 !important;
       letter-spacing: 4px;
